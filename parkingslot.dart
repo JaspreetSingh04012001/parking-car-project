@@ -5,7 +5,7 @@ class Parkingslot {
   bool isavaliable = true;
   Vehical? vehical;
 
-  Parkingslot({required this.slotnumber});
+  Parkingslot({required this.slotnumber, required int slotNumber});
 
   Parkvehical(Vehical) {
     if (isavaliable) {
