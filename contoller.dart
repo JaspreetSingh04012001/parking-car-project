@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'parkingslot.dart';
@@ -7,10 +8,7 @@ import 'vehical.dart';
 class ParkingController {
   List<ParkingSlot> slots = [ParkingSlot("A1"), ParkingSlot("A2")];
 
-  List<Vehical> vehicles = [
-    Vehical(name: "Bullet", number: "PB10-4455"),
-    Vehical(name: "Activa", number: "CH02-9988"),
-  ];
+  List<Vehical> vehicles = [Vehical(name: "Activa", number: "CH02-9988")];
   final Printhelper printHelper = Printhelper();
 
   void start() {
@@ -20,7 +18,9 @@ class ParkingController {
       print("Choose an option:");
       print("1) Show Parking Slots");
       print("2) Show  Vehicles");
-      print("3) Exit");
+      print("3) Add  Vehicle");
+      print("4) Remove  Vehicle");
+      print("5) Exit");
 
       stdout.write("Enter your choice: ");
       String? choice = stdin.readLineSync();
@@ -35,6 +35,12 @@ class ParkingController {
           break;
 
         case "3":
+          addvehical();
+          break;
+        case "4":
+          removeVehical();
+          break;
+        case "5":
           print("Exiting... 👋");
           return;
 
@@ -67,5 +73,34 @@ class ParkingController {
       return true;
     }
     return false;
+  }
+
+  addvehical() {
+    stdout.write("Enter your vehical name: ");
+    String? name = stdin.readLineSync();
+
+    stdout.write("Enter your vehical number: ");
+    String? number = stdin.readLineSync();
+    if (number != null && name != null) {
+      Vehical usercar = Vehical(name: name, number: number);
+      vehicles.add(usercar);
+      stdout.write(
+        "Vehicle ${usercar.name} ${usercar.number} added succssfully",
+      );
+    }
+  }
+
+  removeVehical() {
+    stdout.write("Enter your vehical number: ");
+    String? number = stdin.readLineSync();
+    if (number != null) {
+      vehicles.removeWhere((v) {
+        if (v.number == number) {
+          stdout.write("Vehicle ${number} remove succssfully");
+        }
+
+        return v.number == number;
+      });
+    }
   }
 }
