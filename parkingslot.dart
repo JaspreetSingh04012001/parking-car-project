@@ -25,12 +25,12 @@ class Parkingslot {
     }
   }
 
-  Showslot(Vehical) {
+  Showslot(Parkingslot) {
     print("slot number $slotnumber status ");
     if (isavaliable) {
       print("slot is empty");
     } else {
-      print(" the vehical $Vehical  is already in this slot");
+      print(" the vehical $vehical  is already in this slot $slotnumber");
     }
   }
 }
