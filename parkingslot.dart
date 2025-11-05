@@ -1,36 +1,36 @@
 import 'vehical.dart';
 
-class Parkingslot {
-  String slotnumber;
+class ParkingSlot {
+  final String slotNumber;
   bool isavaliable = true;
   Vehical? vehical;
 
-  Parkingslot({required this.slotnumber});
+  ParkingSlot(this.slotNumber);
 
   Parkvehical(Vehical) {
     if (isavaliable) {
       isavaliable = false;
-      print("$Vehical park at this slot $slotnumber");
+      print("$Vehical park at this slot $slotNumber");
     } else {
-      print("slot $slotnumber is empty you can park your vehical there");
+      print("slot $slotNumber is empty you can park your vehical there");
     }
   }
 
   Removevehical(Vehical) {
     if (isavaliable) {
       isavaliable = true;
-      print("$Vehical this vehical thas been remove this slot $slotnumber");
+      print("$Vehical this vehical thas been remove this slot $slotNumber");
     } else {
-      print("this slot $slotnumber is empty");
+      print("this slot $slotNumber is empty");
     }
   }
 
   Showslot(Parkingslot) {
-    print("slot number $slotnumber status ");
+    print("slot number $slotNumber status ");
     if (isavaliable) {
       print("slot is empty");
     } else {
-      print(" the vehical $vehical  is already in this slot $slotnumber");
+      print(" the vehical $vehical  is already in this slot $slotNumber");
     }
   }
 }

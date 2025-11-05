@@ -1,11 +1,8 @@
-import 'dart:io';
 
 import 'parkingslot.dart';
 import 'vehical.dart';
 
 class Printhelper {
- 
-
   void printVehicles(List<Vehical> vehicles) {
     print("---------------------------------------");
     print("|     Name          |   Number        |");
@@ -20,13 +17,13 @@ class Printhelper {
     print("---------------------------------------");
   }
 
-  void printSlotTable(List<Parkingslot> slots) {
+  void printSlotTable(List<ParkingSlot> slots) {
     print("------------------------------------");
     print("| Slot Number |     Status        |");
     print("------------------------------------");
 
     for (var s in slots) {
-      String slot = s.slotnumber.padRight(12);
+      String slot = s.slotNumber.padRight(12);
       String status = (s.isavaliable ? "Empty" : "Occupied").padRight(14);
 
       print("| $slot | $status |");
