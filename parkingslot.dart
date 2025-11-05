@@ -7,6 +7,8 @@ class ParkingSlot {
 
   ParkingSlot(this.slotNumber);
 
+  get slotName => null;
+
   Parkvehical(Vehical) {
     if (isavaliable) {
       isavaliable = false;

@@ -1,26 +1,25 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'parkingslot.dart';
 import 'printHelper.dart';
 import 'vehical.dart';
 
 class ParkingController {
   List<ParkingSlot> slots = [ParkingSlot("A1"), ParkingSlot("A2")];
-
   List<Vehical> vehicles = [Vehical(name: "Activa", number: "CH02-9988")];
-  final Printhelper printHelper = Printhelper();
+  final Printhelper printhelper = Printhelper();
 
   void start() {
-    print("Welcome to Parking Management System 🚗\n");
+    print("Welcome to Parking Management System 🚗");
 
     while (true) {
-      print("Choose an option:");
+      print("\nChoose an option:");
       print("1) Show Parking Slots");
-      print("2) Show  Vehicles");
-      print("3) Add  Vehicle");
-      print("4) Remove  Vehicle");
-      print("5) Exit");
+      print("2) Show Vehicles");
+      print("3) Add Vehicle");
+      print("4) Remove Vehicle");
+      print("5) Add Parking Slot");
+      print("6) Remove Parking Slot");
+      print("7) Exit");
 
       stdout.write("Enter your choice: ");
       String? choice = stdin.readLineSync();
@@ -28,29 +27,33 @@ class ParkingController {
 
       switch (choice) {
         case "1":
-          printHelper.printSlotTable(slots);
+          printhelper.printSlotTable(slots);
           break;
         case "2":
-          printHelper.printVehicles(vehicles);
+          printhelper.printVehicles(vehicles);
           break;
-
         case "3":
-          addvehical();
+          addVehical();
           break;
         case "4":
           removeVehical();
           break;
         case "5":
+          addSlot();
+          break;
+        case "6":
+          removeSlot();
+          break;
+        case "7":
           print("Exiting... 👋");
           return;
-
         default:
-          print("Invalid option! Try again.\n");
+          print("Invalid option! Try again");
       }
     }
   }
 
-  void park(int slotNo, vehicle) {
+  void park(int slotNo, Vehical vehicle) {
     if (_isInvalidSlot(slotNo)) return;
     slots[slotNo - 1].Parkvehical(vehicle);
   }
@@ -61,7 +64,7 @@ class ParkingController {
   }
 
   void showAll() {
-    print('\n===  Parking Status ===');
+    print('\n=== Parking Status ===');
     for (var slot in slots) {
       slot.Showslot(slot.vehical);
     }
@@ -69,38 +72,73 @@ class ParkingController {
 
   bool _isInvalidSlot(int slotNo) {
     if (slotNo < 1 || slotNo > slots.length) {
-      print(' Invalid slot number: $slotNo');
+      print('Invalid slot number: $slotNo');
       return true;
     }
     return false;
   }
 
-  addvehical() {
-    stdout.write("Enter your vehical name: ");
+  void addVehical() {
+    stdout.write("Enter vehicle name: ");
     String? name = stdin.readLineSync();
 
-    stdout.write("Enter your vehical number: ");
+    stdout.write("Enter vehicle number: ");
     String? number = stdin.readLineSync();
-    if (number != null && name != null) {
-      Vehical usercar = Vehical(name: name, number: number);
-      vehicles.add(usercar);
-      stdout.write(
-        "Vehicle ${usercar.name} ${usercar.number} added succssfully",
-      );
+
+    if (name != null && number != null) {
+      Vehical userCar = Vehical(name: name, number: number);
+      vehicles.add(userCar);
+      print("Vehicle ${userCar.name} (${userCar.number}) added successfully");
+    } else {
+      print("Invalid input! Vehicle not added");
     }
   }
 
-  removeVehical() {
-    stdout.write("Enter your vehical number: ");
+  void removeVehical() {
+    stdout.write("Enter vehicle number: ");
     String? number = stdin.readLineSync();
+
     if (number != null) {
+      bool found = false;
       vehicles.removeWhere((v) {
         if (v.number == number) {
-          stdout.write("Vehicle ${number} remove succssfully");
+          found = true;
+          print("Vehicle $number removed successfully");
+          return true;
         }
-
-        return v.number == number;
+        return false;
       });
+      if (!found) print("Vehicle not found");
+    }
+  }
+
+  void addSlot() {
+    stdout.write("Enter new slot name");
+    String? name = stdin.readLineSync();
+
+    if (name != null && name.isNotEmpty) {
+      slots.add(ParkingSlot(name));
+      print("Slot '$name' added successfully");
+    } else {
+      print("Invalid slot name! Slot not added");
+    }
+  }
+
+  void removeSlot() {
+    stdout.write("Enter slot name to remove: ");
+    String? name = stdin.readLineSync();
+
+    if (name != null && name.isNotEmpty) {
+      bool found = false;
+      slots.removeWhere((slot) {
+        if (slot.slotName == name) {
+          found = true;
+          print("Slot '$name' removed successfully");
+          return true;
+        }
+        return false;
+      });
+      if (!found) print("Slot not found");
     }
   }
 }
