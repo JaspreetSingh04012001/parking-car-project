@@ -12,10 +12,10 @@ Vehical car1=Vehical(name: "punto", number: "20023333");
 Vehical car2=Vehical(name: "swift", number: "666666");
 
 
-slot1.Parkvehical("punto");
-slot2.Parkvehical("swift");
+slot1.Parkvehical(car1);
+slot2.Parkvehical(car2);
 
-slot1.Showslot("punto");
+slot1.Showslot(car1);
 
 
 }
