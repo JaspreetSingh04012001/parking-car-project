@@ -4,15 +4,15 @@ import 'printHelper.dart';
 import 'vehical.dart';
 
 class ParkingController {
-  List<ParkingSlot> slots = [ParkingSlot("A1"), ParkingSlot("A2")];
-  List<Vehical> vehicles = [Vehical(name: "Activa", number: "CH02-9988")];
+  List<ParkingSlot> slots = [];
+  List<Vehical> vehicles = [];
   final Printhelper printhelper = Printhelper();
 
   void start() {
-    print("Welcome to Parking Management System 🚗");
+    print("Welcome to Parking Management System ");
 
     while (true) {
-      print("\nChoose an option:");
+      print("Choose an option:");
       print("1) Show Parking Slots");
       print("2) Show Vehicles");
       print("3) Add Vehicle");
