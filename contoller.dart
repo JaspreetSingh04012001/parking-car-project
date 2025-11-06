@@ -53,9 +53,9 @@ class ParkingController {
     }
   }
 
-  void Parkvehical(String slotNo, Vehical vehicle) {
-    if (_isInvalidSlot(slotNo as int)) return;
-    slots[slotNo as int].Parkvehical(vehicle);
+  void Parkvehical(int slotNo) {
+    if (_isInvalidSlot(slotNo)) return;
+    slots[slotNo - 1].Parkvehical(Vehical);
   }
 
   void Removevehical(int slotNo) {
