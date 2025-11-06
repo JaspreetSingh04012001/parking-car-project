@@ -37,6 +37,4 @@ class ParkingSlot {
       print(" the vehical $vehical  is already in this slot $slotNumber");
     }
   }
-
-  void addVehicle(Vehical vehicle) {}
 }

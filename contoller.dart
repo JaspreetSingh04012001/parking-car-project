@@ -19,7 +19,9 @@ class ParkingController {
       print("4) Remove Vehicle");
       print("5) Add Parking Slot");
       print("6) Remove Parking Slot");
-      print("7) Exit");
+      print("7) Park Vehicle");
+      print("8) Unpark Vehicle");
+      print("9) Exit");
 
       stdout.write("Enter your choice: ");
       String? choice = stdin.readLineSync();
@@ -45,6 +47,12 @@ class ParkingController {
           removeSlot();
           break;
         case "7":
+          selectVehicleForSlot();
+          break;
+        case "8":
+          unparkVehicleFromSlot();
+          break;
+        case "9":
           print("Exiting... 👋");
           return;
         default:
@@ -133,5 +141,76 @@ class ParkingController {
       });
       if (!found) print("Slot not found");
     }
+  }
+
+  void selectVehicleForSlot() {
+    if (vehicles.isEmpty) {
+      print("No vehicles available to park!");
+      return;
+    }
+    if (slots.isEmpty) {
+      print("No parking slots available!");
+      return;
+    }
+
+    printhelper.printVehicles(vehicles);
+    stdout.write("Enter vehicle number to park: ");
+    String? vehicleNumber = stdin.readLineSync();
+
+    Vehical? selectedVehicle;
+    var foundVehicle = vehicles.where((v) => v.number == vehicleNumber);
+    if (foundVehicle.isNotEmpty) {
+      selectedVehicle = foundVehicle.first;
+    }
+
+    if (selectedVehicle == null) {
+      print("Vehicle not found!");
+      return;
+    }
+
+    printhelper.printSlotTable(slots);
+    stdout.write("Enter slot name to park the vehicle in: ");
+    String? slotName = stdin.readLineSync();
+
+    ParkingSlot? selectedSlot;
+    var foundSlot = slots.where((s) => s.slotName == slotName);
+    if (foundSlot.isNotEmpty) {
+      selectedSlot = foundSlot.first;
+    }
+
+    if (selectedSlot == null) {
+      print("Slot not found!");
+      return;
+    }
+
+    selectedSlot.Parkvehical(selectedVehicle);
+    print(
+      "Vehicle ${selectedVehicle.name} (${selectedVehicle.number}) parked in slot ${selectedSlot.slotName}",
+    );
+  }
+
+  void unparkVehicleFromSlot() {
+    if (slots.isEmpty) {
+      print("No parking slots available!");
+      return;
+    }
+
+    printhelper.printSlotTable(slots);
+    stdout.write("Enter slot name to unpark from: ");
+    String? slotName = stdin.readLineSync();
+
+    ParkingSlot? selectedSlot;
+    var foundSlot = slots.where((s) => s.slotName == slotName);
+    if (foundSlot.isNotEmpty) {
+      selectedSlot = foundSlot.first;
+    }
+
+    if (selectedSlot == null) {
+      print("Slot not found!");
+      return;
+    }
+
+    selectedSlot.Removevehical(vehicles);
+    print("Vehicle removed from slot ${selectedSlot.slotName}");
   }
 }
