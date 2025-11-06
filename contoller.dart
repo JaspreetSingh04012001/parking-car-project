@@ -53,21 +53,14 @@ class ParkingController {
     }
   }
 
-  void park(int slotNo, Vehical vehicle) {
-    if (_isInvalidSlot(slotNo)) return;
-    slots[slotNo - 1].Parkvehical(vehicle);
+  void Parkvehical(String slotNo, Vehical vehicle) {
+    if (_isInvalidSlot(slotNo as int)) return;
+    slots[slotNo as int].Parkvehical(vehicle);
   }
 
-  void remove(int slotNo) {
+  void Removevehical(int slotNo) {
     if (_isInvalidSlot(slotNo)) return;
     slots[slotNo - 1].Removevehical(Vehical);
-  }
-
-  void showAll() {
-    print('\n=== Parking Status ===');
-    for (var slot in slots) {
-      slot.Showslot(slot.vehical);
-    }
   }
 
   bool _isInvalidSlot(int slotNo) {
