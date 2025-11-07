@@ -8,7 +8,7 @@ class ParkingController {
   List<Vehical> vehicles = [];
   final Printhelper printhelper = Printhelper();
 
-  void start() {
+  start() {
     print("Welcome to Parking Management System ");
 
     while (true) {
@@ -19,8 +19,8 @@ class ParkingController {
       print("4) Remove Vehicle");
       print("5) Add Parking Slot");
       print("6) Remove Parking Slot");
-      print("7) Park Vehicle");
-      print("8) Unpark Vehicle");
+      print("7) select Vehicle for Slot");
+      print("8) Unpark Vehicle from Slot");
       print("9) Exit");
 
       stdout.write("Enter your choice: ");
@@ -61,25 +61,7 @@ class ParkingController {
     }
   }
 
-  void Parkvehical(int slotNo) {
-    if (_isInvalidSlot(slotNo)) return;
-    slots[slotNo - 1].Parkvehical(Vehical);
-  }
-
-  void Removevehical(int slotNo) {
-    if (_isInvalidSlot(slotNo)) return;
-    slots[slotNo - 1].Removevehical(Vehical);
-  }
-
-  bool _isInvalidSlot(int slotNo) {
-    if (slotNo < 1 || slotNo > slots.length) {
-      print('Invalid slot number: $slotNo');
-      return true;
-    }
-    return false;
-  }
-
-  void addVehical() {
+  addVehical() {
     stdout.write("Enter vehicle name: ");
     String? name = stdin.readLineSync();
 
@@ -95,7 +77,7 @@ class ParkingController {
     }
   }
 
-  void removeVehical() {
+  removeVehical() {
     stdout.write("Enter vehicle number: ");
     String? number = stdin.readLineSync();
 
@@ -113,7 +95,7 @@ class ParkingController {
     }
   }
 
-  void addSlot() {
+  addSlot() {
     stdout.write("Enter new slot name");
     String? name = stdin.readLineSync();
 
@@ -125,7 +107,7 @@ class ParkingController {
     }
   }
 
-  void removeSlot() {
+  removeSlot() {
     stdout.write("Enter slot name to remove: ");
     String? name = stdin.readLineSync();
 
@@ -143,7 +125,7 @@ class ParkingController {
     }
   }
 
-  void selectVehicleForSlot() {
+  selectVehicleForSlot() {
     if (vehicles.isEmpty) {
       print("No vehicles available to park!");
       return;
@@ -173,7 +155,7 @@ class ParkingController {
     String? slotName = stdin.readLineSync();
 
     ParkingSlot? selectedSlot;
-    var foundSlot = slots.where((s) => s.slotName == slotName);
+    var foundSlot = slots.where((s) => s.slotNumber == slotName);
     if (foundSlot.isNotEmpty) {
       selectedSlot = foundSlot.first;
     }
@@ -189,7 +171,7 @@ class ParkingController {
     );
   }
 
-  void unparkVehicleFromSlot() {
+  unparkVehicleFromSlot() {
     if (slots.isEmpty) {
       print("No parking slots available!");
       return;
